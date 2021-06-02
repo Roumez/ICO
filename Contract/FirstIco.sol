@@ -1,22 +1,32 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
 
-pragma solidity ^0.8.0;
+// library usage
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol";
+import "@OpenZeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract FirstIco is IERC20 {
-    
-    // library usage
-
+ 
     // state variables
+    address private _owner;
+    uint256 private _priceToken;
 
     // events
 
     // constructor
-  
+    constructor(address owner_, uint256 initialSupply, uint256 priceToken_) IERC20(){
+        
+    }
 
     // modifiers
+    modifier onlyOwner() {
+        require(msg.sender == _owner, "FirstIco: Only owner can call this function");
+        _;
+    }
 
     // functions
+    function owner() public view returns(address) {
+        return _owner;
+    }
     
 }
